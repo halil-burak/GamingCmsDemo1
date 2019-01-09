@@ -10,7 +10,7 @@ public class HomeController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String home() {
         logger.info("CMS API root page visited.");
         return "CMS API demo root. Under construction!";
