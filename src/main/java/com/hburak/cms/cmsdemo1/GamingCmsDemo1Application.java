@@ -1,4 +1,4 @@
-package com.hburak.redis1.redisdemo1;
+package com.hburak.cms.cmsdemo1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

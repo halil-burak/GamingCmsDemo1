@@ -1,4 +1,6 @@
-package com.hburak.redis1.redisdemo1;
+package com.hburak.cms.cmsdemo1.service;
+
+import com.hburak.cms.cmsdemo1.entity.Game;
 
 import java.util.List;
 

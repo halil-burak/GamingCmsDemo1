@@ -1,4 +1,4 @@
-package com.hburak.redis1.redisdemo1;
+package com.hburak.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
 
@@ -17,6 +17,9 @@ public class Game {
 
     @Column(name="CATEGORY")
     private String category;
+
+    @Column(name = "SOURCE")
+    private String source;
 
     public Long getId() {
         return id;
@@ -48,5 +51,13 @@ public class Game {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

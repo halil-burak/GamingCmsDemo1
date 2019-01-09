@@ -1,4 +1,4 @@
-package com.hburak.redis1.redisdemo1;
+package com.hburak.cms.cmsdemo1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Redisdemo1ApplicationTests {
+public class Cmsdemo1ApplicationTests {
 
 	@Test
 	public void contextLoads() {
