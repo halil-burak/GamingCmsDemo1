@@ -1,6 +1,7 @@
 package com.hburak.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="GAME")
@@ -15,11 +16,18 @@ public class Game {
     @Column(name="URL")
     private String url;
 
-    @Column(name="CATEGORY")
-    private String category;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "GAME_CATEGORY",
+    joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+    inverseJoinColumns = @JoinColumn(name = "CTGRY_ID", referencedColumnName = "ID"))
+    private List<Category> categoryList;
 
     @Column(name = "SOURCE")
     private String source;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID")
+    private GameDescription description;
 
     public Long getId() {
         return id;
@@ -45,19 +53,27 @@ public class Game {
         this.url = url;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getSource() {
         return source;
     }
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public GameDescription getDescription() {
+        return description;
+    }
+
+    public void setDescription(GameDescription description) {
+        this.description = description;
     }
 }

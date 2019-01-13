@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface CategoryService {
     public List<Category> retrieveCategories();
+
+    public void saveCategory(Category category);
+
+    public Category retrieveCategory(Long id);
+
+    public void deleteCategory(Long id);
 }
