@@ -9,7 +9,9 @@ public class GameDescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "description")
+    //@OneToOne(mappedBy = "description", fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GAME_ID")
     private Game game;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,

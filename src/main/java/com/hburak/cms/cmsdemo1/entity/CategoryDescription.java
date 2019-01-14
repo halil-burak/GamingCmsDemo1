@@ -9,10 +9,10 @@ public class CategoryDescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRIPTION")
-    private String text;
-
-    @OneToOne(mappedBy = "description")
+    /*@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
@@ -42,13 +42,5 @@ public class CategoryDescription {
 
     public void setLanguage(Language language) {
         this.language = language;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

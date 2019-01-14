@@ -4,30 +4,31 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="GAME")
-public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Table(name="GAME")
+    public class Game {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Column(name="NAME")
-    private String name;
+        @Column(name="NAME")
+        private String name;
 
-    @Column(name="URL")
-    private String url;
+        @Column(name="URL")
+        private String url;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "GAME_CATEGORY",
-    joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-    inverseJoinColumns = @JoinColumn(name = "CTGRY_ID", referencedColumnName = "ID"))
-    private List<Category> categoryList;
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JoinTable(name = "GAME_CATEGORY",
+                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+                inverseJoinColumns = @JoinColumn(name = "CTGRY_ID", referencedColumnName = "ID"))
+        private List<Category> categoryList;
 
-    @Column(name = "SOURCE")
-    private String source;
+        @Column(name = "SOURCE")
+        private String source;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID")
-    private GameDescription description;
+        /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        @JoinColumn(name = "ID")*/
+        @OneToMany(mappedBy = "game")
+        private List<GameDescription> descriptions;
 
     public Long getId() {
         return id;
@@ -69,11 +70,11 @@ public class Game {
         this.categoryList = categoryList;
     }
 
-    public GameDescription getDescription() {
-        return description;
+    public List<GameDescription> getDescriptions() {
+        return descriptions;
     }
 
-    public void setDescription(GameDescription description) {
-        this.description = description;
+    public void setDescriptions(List<GameDescription> description) {
+        this.descriptions = description;
     }
 }

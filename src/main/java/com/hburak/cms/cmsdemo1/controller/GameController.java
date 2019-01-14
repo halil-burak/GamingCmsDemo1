@@ -1,7 +1,7 @@
 package com.hburak.cms.cmsdemo1.controller;
 
-import com.hburak.cms.cmsdemo1.entity.Game;
 import com.hburak.cms.cmsdemo1.service.GameService;
+import com.hburak.cms.cmsdemo1.entity.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

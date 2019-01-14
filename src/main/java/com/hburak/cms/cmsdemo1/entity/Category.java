@@ -13,9 +13,9 @@ public class Category {
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID")
-    private CategoryDescription description;
+    //@OneToOne(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category")
+    private List<CategoryDescription> descriptions;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "GAME_CATEGORY",
@@ -39,19 +39,19 @@ public class Category {
         this.name = name;
     }
 
-    public CategoryDescription getDescription() {
-        return description;
-    }
-
-    public void setDescription(CategoryDescription description) {
-        this.description = description;
-    }
-
     public List<Game> getGameList() {
         return gameList;
     }
 
     public void setGameList(List<Game> gameList) {
         this.gameList = gameList;
+    }
+
+    public List<CategoryDescription> getDescriptions() {
+        return descriptions;
+    }
+
+    public void setDescriptions(List<CategoryDescription> descriptions) {
+        this.descriptions = descriptions;
     }
 }
