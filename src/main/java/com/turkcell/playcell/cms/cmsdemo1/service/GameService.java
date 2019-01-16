@@ -13,4 +13,6 @@ public interface GameService {
     public void saveGame(Game game);
 
     public void deleteGame(Long gameId);
+
+    public boolean existsById(Long gameId);
 }

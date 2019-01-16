@@ -12,4 +12,6 @@ public interface CategoryService {
     public Category retrieveCategory(Long id);
 
     public void deleteCategory(Long id);
+
+    public boolean existsById(Long id);
 }

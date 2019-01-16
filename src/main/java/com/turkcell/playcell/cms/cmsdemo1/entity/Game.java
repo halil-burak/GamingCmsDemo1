@@ -16,14 +16,29 @@ import java.util.List;
         @Column(name="URL")
         private String url;
 
-        @ManyToMany(cascade = CascadeType.ALL)
-        @JoinTable(name = "GAME_CATEGORY",
-                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = @JoinColumn(name = "CTGRY_ID", referencedColumnName = "ID"))
-        private List<Category> categoryList;
+        @Column(name="ENVIRONMENT")
+        private String environment;
 
-        @Column(name = "SOURCE")
-        private String source;
+        @Column(name="TYPE")
+        private String type;
+
+        @Column(name="LINK")
+        private String link;
+
+        @Column(name="BLOCK_LINK")
+        private boolean block_link;
+
+        @Column(name="SIZE")
+        private Long size;
+
+        @Column(name="RESIZE")
+        private boolean resize;
+
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JoinTable(name = "PLATFORM_GAME_CATEGORY",
+                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
+        private List<Category> categoryList;
 
         /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         @JoinColumn(name = "ID")*/
@@ -54,14 +69,6 @@ import java.util.List;
         this.url = url;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public List<Category> getCategoryList() {
         return categoryList;
     }
@@ -76,5 +83,53 @@ import java.util.List;
 
     public void setDescriptions(List<GameDescription> description) {
         this.descriptions = description;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public boolean isBlock_link() {
+        return block_link;
+    }
+
+    public void setBlock_link(boolean block_link) {
+        this.block_link = block_link;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public boolean isResize() {
+        return resize;
+    }
+
+    public void setResize(boolean resize) {
+        this.resize = resize;
     }
 }

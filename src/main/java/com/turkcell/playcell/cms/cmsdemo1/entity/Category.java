@@ -13,13 +13,9 @@ public class Category {
     @Column(name = "NAME")
     private String name;
 
-    //@OneToOne(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "category")
-    private List<CategoryDescription> descriptions;
-
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "CTGRY_ID", referencedColumnName = "ID"),
+    @JoinTable(name = "PLATFORM_GAME_CATEGORY",
+            joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"))
     private List<Game> gameList;
 
@@ -45,13 +41,5 @@ public class Category {
 
     public void setGameList(List<Game> gameList) {
         this.gameList = gameList;
-    }
-
-    public List<CategoryDescription> getDescriptions() {
-        return descriptions;
-    }
-
-    public void setDescriptions(List<CategoryDescription> descriptions) {
-        this.descriptions = descriptions;
     }
 }

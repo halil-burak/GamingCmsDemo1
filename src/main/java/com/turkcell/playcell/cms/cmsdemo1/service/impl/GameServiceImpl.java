@@ -45,4 +45,9 @@ public class GameServiceImpl implements GameService {
     public void deleteGame(Long gameId) {
         gameRepository.deleteById(gameId);
     }
+
+    @Override
+    public boolean existsById(Long gameId) {
+        return gameRepository.existsById(gameId);
+    }
 }

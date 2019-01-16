@@ -3,7 +3,7 @@ package com.hburak.cms.cmsdemo1.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "GAME_DESCRIPTION")
+@Table(name = "GAME_DESCRIPTION", uniqueConstraints = @UniqueConstraint(columnNames = {"GAME_ID", "LANG_ID"}))
 public class GameDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
