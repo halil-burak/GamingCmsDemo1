@@ -34,7 +34,7 @@ public class User {
         this.setUsername(name);
         this.setPassword(password);
         this.setRole(role);
-        this.setIsactive(true);
+        this.setIsactive(false);
     }
 
     public Long getId() {

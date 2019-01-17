@@ -211,6 +211,10 @@ public class UserController {
                     updatedUser.setRole(newUser.getRole());
                 }
 
+                if (newUser.getIsactive() != null) {
+                    updatedUser.setIsactive(newUser.getIsactive());
+                }
+
                 userService.saveUser(updatedUser);
 
                 return new ResponseEntity<Object>(HttpStatus.OK);
