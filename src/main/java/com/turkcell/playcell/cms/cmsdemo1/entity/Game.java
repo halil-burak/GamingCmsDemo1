@@ -15,24 +15,24 @@ import java.util.List;
 
         @Column(name="URL")
         private String url;
-
+/*
         @Column(name="ENVIRONMENT")
         private String environment;
 
         @Column(name="TYPE")
-        private String type;
+        private String type;*/
 
         @Column(name="LINK")
         private String gameLink;
 
         @Column(name="BLOCK_LINK")
         private boolean blockLink;
-
+/*
         @Column(name="SIZE")
         private Long size;
 
         @Column(name="RESIZE")
-        private boolean resize;
+        private boolean resize;*/
 
         /*@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
         @JoinTable(name = "GAME_CATEGORY",
@@ -90,6 +90,7 @@ import java.util.List;
         this.descriptions = description;
     }
 
+    /*
     public String getEnvironment() {
         return environment;
     }
@@ -104,7 +105,7 @@ import java.util.List;
 
     public void setType(String type) {
         this.type = type;
-    }
+    }*/
 
     public String getGameLink() {
         return gameLink;
@@ -122,6 +123,7 @@ import java.util.List;
         this.blockLink = blockLink;
     }
 
+    /*
     public Long getSize() {
         return size;
     }
@@ -136,5 +138,5 @@ import java.util.List;
 
     public void setResize(boolean resize) {
         this.resize = resize;
-    }
+    }*/
 }

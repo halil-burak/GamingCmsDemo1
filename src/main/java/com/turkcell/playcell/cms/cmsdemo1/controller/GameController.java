@@ -84,10 +84,11 @@ public class GameController {
             JSONObject json = new JSONObject();
             json.put("id", game.getId());
             json.put("name", game.getName());
-            json.put("type", game.getType());
+            //json.put("type", game.getType());
             json.put("url", game.getUrl());
-            json.put("link", game.getGameLink());
+            json.put("gameLink", game.getGameLink());
             //json.put("size", game.getSize());
+            //json.put("resize", game.isResize());
             //json.put("environment", game.getEnvironment());
             json.put("isBlockLink", game.isBlockLink());
             json.put("categories", game.getCategoryList());

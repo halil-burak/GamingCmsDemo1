@@ -49,7 +49,7 @@ public class CategoryController {
         return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<?> addCategory(@RequestBody Category category) {
         logger.info("Adding a category");
         List<Category> categoryList = categoryService.retrieveCategories();
@@ -101,8 +101,9 @@ public class CategoryController {
                 oldCategory.setName(newCategory.getName());
             oldCategory.setGameList(null);
             List<Game> gameList = newCategory.getGameList();
-            oldCategory.getGameList().addAll(gameList);
-
+            if (!gameList.isEmpty()) {
+                oldCategory.getGameList().addAll(gameList);
+            }
             categoryService.saveCategory(oldCategory);
 
             JSONObject json = new JSONObject();
