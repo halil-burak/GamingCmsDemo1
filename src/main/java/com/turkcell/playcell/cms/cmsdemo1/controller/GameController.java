@@ -47,6 +47,7 @@ public class GameController {
                 json.put("environment", game.getEnvironment());
                 json.put("categorylist", game.getCategoryList());
                 json.put("descriptionlist", game.getDescriptions());
+                jsonObjects.add(json);
             }
             return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
@@ -99,7 +100,7 @@ public class GameController {
     }
 
     @PutMapping("/{id}")
-    public void updateGame(@RequestBody Game newGame, @PathVariable Long id) {
+    public ResponseEntity updateGame(@RequestBody Game newGame, @PathVariable Long id) {
         logger.info("Updating game...");
         if (gameService.existsById(id)) {
             Game game = gameService.retrieveGame(id);
@@ -112,18 +113,21 @@ public class GameController {
             }
 
             gameService.saveGame(game);
+            return new ResponseEntity(HttpStatus.OK);
         }
-        logger.info("Game updated");
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{gameId}")
-    public void deleteGame(@PathVariable(name = "gameId")Long gameId) {
+    public ResponseEntity deleteGame(@PathVariable(name = "gameId")Long gameId) {
         logger.info("Deleting a game");
         if (gameService.existsById(gameId)) {
             logger.info("Game removed.");
             gameService.deleteGame(gameId);
+            return new ResponseEntity(HttpStatus.OK);
         } else {
             logger.info("Game could not be found!");
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 }

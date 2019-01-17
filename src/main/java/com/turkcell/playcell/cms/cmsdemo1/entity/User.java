@@ -29,12 +29,17 @@ public class User {
         return;
     }
     @JsonCreator
-    public User(@JsonProperty("username") String name, @JsonProperty("password")String password, @JsonProperty("role") Integer role) {
+    public User(@JsonProperty("username") String name, @JsonProperty("password")String password,
+                @JsonProperty("role") Integer role, @JsonProperty("isactive") Boolean isactive) {
 
         this.setUsername(name);
         this.setPassword(password);
         this.setRole(role);
-        this.setIsactive(false);
+        if (isactive != null) {
+            this.setIsactive(isactive);
+        } else {
+            this.setIsactive(false);
+        }
     }
 
     public Long getId() {

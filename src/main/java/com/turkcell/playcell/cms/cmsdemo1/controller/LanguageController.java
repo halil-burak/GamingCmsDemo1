@@ -40,14 +40,16 @@ public class LanguageController {
                 JSONObject json = new JSONObject();
                 json.put("id", language.getId());
                 json.put("name", language.getName());
-                json.put("shortname", language.getShortName());
+                json.put("shortName", language.getShortName());
+                jsonObjects.add(json);
             }
-            return new ResponseEntity<Object>(HttpStatus.OK);
+            logger.info("Languages listed");
+            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<String>("No languages found", HttpStatus.OK);
+        return new ResponseEntity<String>("No languages was found", HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Object> addLanguage(@RequestBody Language language) {
         logger.info("Adding a language.");
         try {
@@ -55,7 +57,7 @@ public class LanguageController {
             JSONObject json = new JSONObject();
             json.put("id", language.getId());
             json.put("name", language.getName());
-            json.put("shortname", language.getShortName());
+            json.put("shortName", language.getShortName());
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,7 +73,7 @@ public class LanguageController {
             JSONObject json = new JSONObject();
             json.put("id", language.getId());
             json.put("name", language.getName());
-            json.put("shortname", language.getShortName());
+            json.put("shortName", language.getShortName());
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
         return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);

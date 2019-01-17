@@ -43,6 +43,7 @@ public class CategoryController {
                 json.put("id", category.getId());
                 json.put("name", category.getName());
                 json.put("gamelist", category.getPgcList());
+                jsonObjects.add(json);
             }
             return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
