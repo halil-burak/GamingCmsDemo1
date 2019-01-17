@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.controller;
+package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -6,9 +6,9 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.hburak.cms.cmsdemo1.entity.User;
-import com.hburak.cms.cmsdemo1.service.UserService;
-import com.hburak.cms.cmsdemo1.util.UserNotFoundException;
+import com.turkcell.playcell.cms.cmsdemo1.entity.User;
+import com.turkcell.playcell.cms.cmsdemo1.service.UserService;
+import com.turkcell.playcell.cms.cmsdemo1.util.UserNotFoundException;
 import org.identityconnectors.common.security.GuardedString;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/user-login")
 public class UserController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -214,14 +213,7 @@ public class UserController {
 
                 userService.saveUser(updatedUser);
 
-                JSONObject entity = new JSONObject();
-
-                entity.put("id", updatedUser.getId());
-                entity.put("username", updatedUser.getUsername());
-                entity.put("role", updatedUser.getRole());
-                entity.put("isactive", updatedUser.getIsactive());
-
-                return new ResponseEntity<Object>(entity.toMap(),HttpStatus.OK);
+                return new ResponseEntity<Object>(HttpStatus.OK);
             }
         }
 

@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.util;
+package com.turkcell.playcell.cms.cmsdemo1.util;
 
 public class UserNotFoundException extends RuntimeException{
     private static final long serialVersionUID = 1L;

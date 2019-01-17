@@ -1,7 +1,7 @@
-package com.hburak.cms.cmsdemo1.controller;
+package com.turkcell.playcell.cms.cmsdemo1.controller;
 
-import com.hburak.cms.cmsdemo1.entity.Language;
-import com.hburak.cms.cmsdemo1.service.LanguageService;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Language;
+import com.turkcell.playcell.cms.cmsdemo1.service.LanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

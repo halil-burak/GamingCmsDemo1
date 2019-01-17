@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.entity;
+package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.entity;
+package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,8 +16,11 @@ public class Category {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PLATFORM_GAME_CATEGORY",
             joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"))
-    private List<Game> gameList;
+            inverseJoinColumns = {
+                    @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+                    @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
+            })
+    private List<PlatformGameCategory> pgcList;
 
     public Long getId() {
         return id;
@@ -35,11 +38,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Game> getGameList() {
-        return gameList;
+    public List<PlatformGameCategory> getPgcList() {
+        return pgcList;
     }
 
-    public void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
+    public void setPgcList(List<PlatformGameCategory> pgcList) {
+        this.pgcList = pgcList;
     }
 }

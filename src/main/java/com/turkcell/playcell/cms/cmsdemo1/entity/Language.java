@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.entity;
+package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
 import java.util.Date;

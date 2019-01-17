@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1;
+package com.turkcell.playcell.cms.cmsdemo1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

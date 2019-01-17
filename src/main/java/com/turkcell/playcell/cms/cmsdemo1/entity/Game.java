@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.entity;
+package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,10 +34,13 @@ import java.util.List;
         @Column(name="RESIZE")
         private boolean resize;
 
-        @ManyToMany(cascade = CascadeType.ALL)
+        @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
         @JoinTable(name = "PLATFORM_GAME_CATEGORY",
                 joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
+                inverseJoinColumns = {
+                        @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
+                        @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
+                })
         private List<Category> categoryList;
 
         /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

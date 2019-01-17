@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.controller;
+package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

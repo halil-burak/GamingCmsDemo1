@@ -1,11 +1,11 @@
-package com.hburak.cms.cmsdemo1;
+package com.turkcell.playcell.cms.cmsdemo1;
 
-import com.hburak.cms.cmsdemo1.controller.CategoryController;
-import com.hburak.cms.cmsdemo1.controller.GameController;
-import com.hburak.cms.cmsdemo1.entity.Category;
-import com.hburak.cms.cmsdemo1.entity.Game;
-import com.hburak.cms.cmsdemo1.repo.CategoryRepository;
-import com.hburak.cms.cmsdemo1.repo.GameRepository;
+import com.turkcell.playcell.cms.cmsdemo1.controller.CategoryController;
+import com.turkcell.playcell.cms.cmsdemo1.controller.GameController;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.repo.CategoryRepository;
+import com.turkcell.playcell.cms.cmsdemo1.repo.GameRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

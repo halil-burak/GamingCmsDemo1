@@ -1,8 +1,9 @@
-package com.hburak.cms.cmsdemo1.controller;
+package com.turkcell.playcell.cms.cmsdemo1.controller;
 
-import com.hburak.cms.cmsdemo1.entity.Category;
-import com.hburak.cms.cmsdemo1.entity.Game;
-import com.hburak.cms.cmsdemo1.service.CategoryService;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.PlatformGameCategory;
+import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class CategoryController {
                 JSONObject json = new JSONObject();
                 json.put("id", category.getId());
                 json.put("name", category.getName());
-                json.put("gamelist", category.getGameList());
+                json.put("gamelist", category.getPgcList());
             }
             return new ResponseEntity<>(jsonObjects.toString(), HttpStatus.OK);
         }
@@ -69,7 +70,7 @@ public class CategoryController {
             JSONObject json = new JSONObject();
             json.put("id", category.getId());
             json.put("name", category.getName());
-            json.put("gamelist", category.getGameList());
+            json.put("gamelist", category.getPgcList());
 
             return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
         }
@@ -92,16 +93,16 @@ public class CategoryController {
             Category oldCategory = categoryService.retrieveCategory(id);
             if (newCategory.getName() != null)
                 oldCategory.setName(newCategory.getName());
-            oldCategory.setGameList(null);
-            List<Game> gameList = newCategory.getGameList();
-            oldCategory.getGameList().addAll(gameList);
+            oldCategory.setPgcList(null);
+            List<PlatformGameCategory> gameList = newCategory.getPgcList();
+            oldCategory.getPgcList().addAll(gameList);
 
             categoryService.saveCategory(oldCategory);
 
             JSONObject json = new JSONObject();
             json.put("id", newCategory.getId());
             json.put("name", newCategory.getName());
-            json.put("gamelist", newCategory.getGameList());
+            json.put("gamelist", newCategory.getPgcList());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

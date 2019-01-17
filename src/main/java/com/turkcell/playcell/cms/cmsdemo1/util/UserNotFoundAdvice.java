@@ -1,4 +1,4 @@
-package com.hburak.cms.cmsdemo1.util;
+package com.turkcell.playcell.cms.cmsdemo1.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

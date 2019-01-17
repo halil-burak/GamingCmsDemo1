@@ -1,6 +1,6 @@
-package com.hburak.cms.cmsdemo1.service;
+package com.turkcell.playcell.cms.cmsdemo1.service;
 
-import com.hburak.cms.cmsdemo1.entity.Category;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 
 import java.util.List;
 

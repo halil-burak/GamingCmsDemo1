@@ -1,7 +1,7 @@
-package com.hburak.cms.cmsdemo1.controller;
+package com.turkcell.playcell.cms.cmsdemo1.controller;
 
-import com.hburak.cms.cmsdemo1.service.GameService;
-import com.hburak.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.service.GameService;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

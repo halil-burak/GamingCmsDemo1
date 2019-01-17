@@ -1,8 +1,8 @@
-package com.hburak.cms.cmsdemo1.service.impl;
+package com.turkcell.playcell.cms.cmsdemo1.service.impl;
 
-import com.hburak.cms.cmsdemo1.entity.Language;
-import com.hburak.cms.cmsdemo1.repo.LanguageRepository;
-import com.hburak.cms.cmsdemo1.service.LanguageService;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Language;
+import com.turkcell.playcell.cms.cmsdemo1.repo.LanguageRepository;
+import com.turkcell.playcell.cms.cmsdemo1.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
