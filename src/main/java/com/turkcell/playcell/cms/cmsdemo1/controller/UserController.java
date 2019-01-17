@@ -120,7 +120,7 @@ public class UserController {
 
     @GetMapping(path= "/users", produces=MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> getUserlist(@RequestHeader HttpHeaders headers) {
-
+        List<JSONObject> entities = new ArrayList<JSONObject>();
         List<String> token = headers.get("Authorization");
         int idx = token.get(0).indexOf(" ");
 
@@ -131,26 +131,18 @@ public class UserController {
 
                 List<User> entityList = userService.retrieveUsers();
 
-                List<JSONObject> entities = new ArrayList<JSONObject>();
-
                 for (User n : entityList) {
-
                     JSONObject entity = new JSONObject();
-
                     entity.put("id", n.getId());
                     entity.put("username", n.getUsername());
                     entity.put("role", n.getRole());
                     entity.put("isactive", n.getIsactive());
                     entities.add(entity);
-
                 }
-
                 return new ResponseEntity<String>(entities.toString(), HttpStatus.OK);
             }
         }
-
         return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
-
     }
 
     @PostMapping(path= "/users", produces=MediaType.APPLICATION_JSON_VALUE)

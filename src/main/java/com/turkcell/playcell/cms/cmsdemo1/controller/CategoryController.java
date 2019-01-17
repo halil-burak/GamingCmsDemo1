@@ -35,19 +35,19 @@ public class CategoryController {
     @GetMapping("")
     public ResponseEntity<Object> getCategories() {
         logger.info("Retrieving categories");
+        List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
         if (!categoryService.retrieveCategories().isEmpty()) {
             List<Category> categoryList = categoryService.retrieveCategories();
-            List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
             for (Category category : categoryList) {
                 JSONObject json = new JSONObject();
                 json.put("id", category.getId());
                 json.put("name", category.getName());
-                json.put("gamelist", category.getPgcList());
+                json.put("url", category.getUrl());
+                json.put("gamelist", category.getGameList());
                 jsonObjects.add(json);
             }
-            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -71,11 +71,12 @@ public class CategoryController {
             JSONObject json = new JSONObject();
             json.put("id", category.getId());
             json.put("name", category.getName());
-            json.put("gamelist", category.getPgcList());
+            json.put("url", category.getUrl());
+            json.put("gamelist", category.getGameList());
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{categoryId}")
@@ -94,16 +95,17 @@ public class CategoryController {
             Category oldCategory = categoryService.retrieveCategory(id);
             if (newCategory.getName() != null)
                 oldCategory.setName(newCategory.getName());
-            oldCategory.setPgcList(null);
-            List<PlatformGameCategory> gameList = newCategory.getPgcList();
-            oldCategory.getPgcList().addAll(gameList);
+            oldCategory.setGameList(null);
+            List<Game> gameList = newCategory.getGameList();
+            oldCategory.getGameList().addAll(gameList);
 
             categoryService.saveCategory(oldCategory);
 
             JSONObject json = new JSONObject();
             json.put("id", newCategory.getId());
             json.put("name", newCategory.getName());
-            json.put("gamelist", newCategory.getPgcList());
+            json.put("url", newCategory.getUrl());
+            json.put("gamelist", newCategory.getGameList());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

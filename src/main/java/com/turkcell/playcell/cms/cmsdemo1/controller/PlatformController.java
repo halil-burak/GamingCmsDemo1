@@ -26,7 +26,7 @@ public class PlatformController {
     }
 
     @GetMapping("")
-    public List<Platform> getPlatform() {
+    public List<Platform> getPlatforms() {
         List<Platform> platformList = platformService.retrievePlatforms();
         logger.info("Retrieving platforms.");
         return platformList;

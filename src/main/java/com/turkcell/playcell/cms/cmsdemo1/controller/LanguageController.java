@@ -33,9 +33,9 @@ public class LanguageController {
     @GetMapping("")
     public ResponseEntity<?> getLanguages() {
         logger.info("Retrieving languages.");
+        List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
         if (!languageService.retrieveLanguages().isEmpty()) {
             List<Language> languageList = languageService.retrieveLanguages();
-            List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
             for (Language language : languageList) {
                 JSONObject json = new JSONObject();
                 json.put("id", language.getId());
@@ -44,9 +44,8 @@ public class LanguageController {
                 jsonObjects.add(json);
             }
             logger.info("Languages listed");
-            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<String>("No languages was found", HttpStatus.OK);
+        return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
     }
 
     @PostMapping("")

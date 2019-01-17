@@ -33,9 +33,9 @@ public class GameController {
     @GetMapping("")
     public ResponseEntity<Object> getGames() {
         logger.info("retrieving games");
+        List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
         if (!gameService.retrieveGames().isEmpty()) {
             List<Game> gameList = gameService.retrieveGames();
-            List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
             for (Game game : gameList) {
                 JSONObject json = new JSONObject();
                 json.put("id", game.getId());
@@ -49,9 +49,8 @@ public class GameController {
                 json.put("descriptionlist", game.getDescriptions());
                 jsonObjects.add(json);
             }
-            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
     }
 
     @GetMapping("/{gameId}")

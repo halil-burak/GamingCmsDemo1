@@ -34,13 +34,15 @@ import java.util.List;
         @Column(name="RESIZE")
         private boolean resize;
 
-        @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-        @JoinTable(name = "PLATFORM_GAME_CATEGORY",
+        /*@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+        @JoinTable(name = "GAME_CATEGORY",
                 joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = {
-                        @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-                        @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
-                })
+                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
+        private List<Category> categoryList;*/
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JoinTable(name = "GAME_CATEGORY",
+                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
         private List<Category> categoryList;
 
         /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
