@@ -43,4 +43,9 @@ public class LanguageServiceImpl implements LanguageService {
     public void deleteLanguage(Long id) {
         languageRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return languageRepository.existsById(id);
+    }
 }

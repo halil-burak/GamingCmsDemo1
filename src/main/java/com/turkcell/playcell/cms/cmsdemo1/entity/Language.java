@@ -1,7 +1,6 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "LANGUAGE")
@@ -13,14 +12,8 @@ public class Language {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "LOCAL_NAME")
-    private String localName;
-
-    /*@Column(name = "IS_ACTIVE")
-    private boolean isActive;
-
-    @Column(name = "CREATE_DATE")
-    private Date createDate;*/
+    @Column(name = "SHORT_NAME")
+    private String shortName;
 
     public Long getId() {
         return id;
@@ -38,28 +31,11 @@ public class Language {
         this.name = name;
     }
 
-    public String getLocalName() {
-        return localName;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setLocalName(String localName) {
-        this.localName = localName;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
-
-    /*
-    public boolean isActive() {
-        return     isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }*/
 }

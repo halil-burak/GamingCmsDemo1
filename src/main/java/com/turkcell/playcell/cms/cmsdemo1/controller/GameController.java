@@ -31,7 +31,7 @@ public class GameController {
     }
 
     @GetMapping("")
-    public ResponseEntity<String> getGames() {
+    public ResponseEntity<Object> getGames() {
         logger.info("retrieving games");
         if (!gameService.retrieveGames().isEmpty()) {
             List<Game> gameList = gameService.retrieveGames();
@@ -48,13 +48,13 @@ public class GameController {
                 json.put("categorylist", game.getCategoryList());
                 json.put("descriptionlist", game.getDescriptions());
             }
-            return new ResponseEntity<String>(jsonObjects.toString(), HttpStatus.OK);
+            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{gameId}")
-    public ResponseEntity<String> getGame(@PathVariable(name="gameId")Long gameId) {
+    public ResponseEntity<Object> getGame(@PathVariable(name="gameId")Long gameId) {
         logger.info("retrieving a single game");
         if (gameService.existsById(gameId)) {
             Game game = gameService.retrieveGame(gameId);
@@ -69,13 +69,13 @@ public class GameController {
             json.put("categorylist", game.getCategoryList());
             json.put("descriptionlist", game.getDescriptions());
 
-            return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+            return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
-        return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> addGame(@RequestBody Game game) {
+    public ResponseEntity<Object> addGame(@RequestBody Game game) {
         logger.info("adding a game");
         try {
             gameService.saveGame(game);
@@ -89,13 +89,13 @@ public class GameController {
             json.put("environment", game.getEnvironment());
             json.put("categorylist", game.getCategoryList());
             json.put("descriptionlist", game.getDescriptions());
-            System.out.println("Game added.");
+            logger.info("Game added.");
+
+            return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<Object>(HttpStatus.BAD_GATEWAY);
         }
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

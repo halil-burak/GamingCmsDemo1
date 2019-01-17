@@ -33,7 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping("")
-    public ResponseEntity<String> getCategories() {
+    public ResponseEntity<Object> getCategories() {
         logger.info("Retrieving categories");
         if (!categoryService.retrieveCategories().isEmpty()) {
             List<Category> categoryList = categoryService.retrieveCategories();
@@ -44,13 +44,13 @@ public class CategoryController {
                 json.put("name", category.getName());
                 json.put("gamelist", category.getPgcList());
             }
-            return new ResponseEntity<>(jsonObjects.toString(), HttpStatus.OK);
+            return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> addCategory(@RequestBody Category category) {
+    public ResponseEntity<?> addCategory(@RequestBody Category category) {
         logger.info("Adding a category");
         List<Category> categoryList = categoryService.retrieveCategories();
         for (Category ctg : categoryList) {
@@ -59,11 +59,11 @@ public class CategoryController {
             }
         }
         categoryService.saveCategory(category);
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<String> getCategory(@PathVariable(name = "categoryId")Long id) {
+    public ResponseEntity<Object> getCategory(@PathVariable(name = "categoryId")Long id) {
         logger.info("Retrieving a category.");
         if (categoryService.existsById(id)) {
             Category category = categoryService.retrieveCategory(id);
@@ -72,19 +72,19 @@ public class CategoryController {
             json.put("name", category.getName());
             json.put("gamelist", category.getPgcList());
 
-            return new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+            return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity deleteCategory(@PathVariable(name = "categoryId")Long id) {
+    public ResponseEntity<Object> deleteCategory(@PathVariable(name = "categoryId")Long id) {
         logger.info("Deleting a category.");
         if (categoryService.existsById(id)) {
             categoryService.deleteCategory(id);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<Object>(HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")

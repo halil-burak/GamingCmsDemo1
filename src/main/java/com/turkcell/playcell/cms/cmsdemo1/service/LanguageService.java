@@ -13,4 +13,6 @@ public interface LanguageService {
     public Language retrieveLanguage(Long id);
 
     public void deleteLanguage(Long id);
+
+    public boolean existsById(Long id);
 }
