@@ -40,13 +40,14 @@ public class GameController {
                 JSONObject json = new JSONObject();
                 json.put("id", game.getId());
                 json.put("name", game.getName());
-                json.put("type", game.getType());
+                //json.put("type", game.getType());
                 json.put("url", game.getUrl());
-                json.put("link", game.getLink());
-                json.put("size", game.getSize());
-                json.put("environment", game.getEnvironment());
-                json.put("categorylist", game.getCategoryList());
-                json.put("descriptionlist", game.getDescriptions());
+                json.put("link", game.getGameLink());
+                //json.put("size", game.getSize());
+                //json.put("environment", game.getEnvironment());
+                json.put("isBlockLink", game.isBlockLink());
+                json.put("categories", game.getCategoryList());
+                json.put("descriptions", game.getDescriptions());
                 jsonObjects.add(json);
             }
         }
@@ -54,27 +55,28 @@ public class GameController {
     }
 
     @GetMapping("/{gameId}")
-    public ResponseEntity<Object> getGame(@PathVariable(name="gameId")Long gameId) {
+    public ResponseEntity<Object> getGame(@PathVariable(name = "gameId") Long gameId) {
         logger.info("retrieving a single game");
         if (gameService.existsById(gameId)) {
             Game game = gameService.retrieveGame(gameId);
             JSONObject json = new JSONObject();
             json.put("id", game.getId());
             json.put("name", game.getName());
-            json.put("type", game.getType());
+            //json.put("type", game.getType());
             json.put("url", game.getUrl());
-            json.put("link", game.getLink());
-            json.put("size", game.getSize());
-            json.put("environment", game.getEnvironment());
-            json.put("categorylist", game.getCategoryList());
-            json.put("descriptionlist", game.getDescriptions());
+            json.put("link", game.getGameLink());
+            //json.put("size", game.getSize());
+            //json.put("environment", game.getEnvironment());
+            json.put("isBlockLink", game.isBlockLink());
+            json.put("categories", game.getCategoryList());
+            json.put("descriptions", game.getDescriptions());
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
         return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Object> addGame(@RequestBody Game game) {
         logger.info("adding a game");
         try {
@@ -84,11 +86,12 @@ public class GameController {
             json.put("name", game.getName());
             json.put("type", game.getType());
             json.put("url", game.getUrl());
-            json.put("link", game.getLink());
-            json.put("size", game.getSize());
-            json.put("environment", game.getEnvironment());
-            json.put("categorylist", game.getCategoryList());
-            json.put("descriptionlist", game.getDescriptions());
+            json.put("link", game.getGameLink());
+            //json.put("size", game.getSize());
+            //json.put("environment", game.getEnvironment());
+            json.put("isBlockLink", game.isBlockLink());
+            json.put("categories", game.getCategoryList());
+            json.put("descriptions", game.getDescriptions());
             logger.info("Game added.");
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
@@ -98,8 +101,8 @@ public class GameController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity updateGame(@RequestBody Game newGame, @PathVariable Long id) {
+    @PutMapping("/{gameId}")
+    public ResponseEntity updateGame(@RequestBody Game newGame, @PathVariable(name = "gameId") Long id) {
         logger.info("Updating game...");
         if (gameService.existsById(id)) {
             Game game = gameService.retrieveGame(id);
@@ -118,7 +121,7 @@ public class GameController {
     }
 
     @DeleteMapping("/{gameId}")
-    public ResponseEntity deleteGame(@PathVariable(name = "gameId")Long gameId) {
+    public ResponseEntity deleteGame(@PathVariable(name = "gameId") Long gameId) {
         logger.info("Deleting a game");
         if (gameService.existsById(gameId)) {
             logger.info("Game removed.");

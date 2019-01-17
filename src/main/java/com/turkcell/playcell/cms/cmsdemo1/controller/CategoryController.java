@@ -2,7 +2,6 @@ package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
-import com.turkcell.playcell.cms.cmsdemo1.entity.PlatformGameCategory;
 import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -54,13 +53,18 @@ public class CategoryController {
     public ResponseEntity<?> addCategory(@RequestBody Category category) {
         logger.info("Adding a category");
         List<Category> categoryList = categoryService.retrieveCategories();
+        JSONObject json = new JSONObject();
         for (Category ctg : categoryList) {
             if (ctg.getName().equals(category.getName())) {
                 return new ResponseEntity<String>("There is already one category with this name.", HttpStatus.BAD_REQUEST);
             }
         }
         categoryService.saveCategory(category);
-        return new ResponseEntity<Object>(HttpStatus.OK);
+        json.put("id", category.getId());
+        json.put("url", category.getUrl());
+        json.put("name", category.getName());
+        json.put("gameList", category.getGameList());
+        return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")

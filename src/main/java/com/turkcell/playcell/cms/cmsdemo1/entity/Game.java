@@ -23,10 +23,10 @@ import java.util.List;
         private String type;
 
         @Column(name="LINK")
-        private String link;
+        private String gameLink;
 
         @Column(name="BLOCK_LINK")
-        private boolean block_link;
+        private boolean blockLink;
 
         @Column(name="SIZE")
         private Long size;
@@ -106,20 +106,20 @@ import java.util.List;
         this.type = type;
     }
 
-    public String getLink() {
-        return link;
+    public String getGameLink() {
+        return gameLink;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setGameLink(String gameLink) {
+        this.gameLink = gameLink;
     }
 
-    public boolean isBlock_link() {
-        return block_link;
+    public boolean isBlockLink() {
+        return blockLink;
     }
 
-    public void setBlock_link(boolean block_link) {
-        this.block_link = block_link;
+    public void setBlockLink(boolean blockLink) {
+        this.blockLink = blockLink;
     }
 
     public Long getSize() {
