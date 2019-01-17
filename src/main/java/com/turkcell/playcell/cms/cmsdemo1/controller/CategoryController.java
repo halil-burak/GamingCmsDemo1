@@ -101,7 +101,7 @@ public class CategoryController {
                 oldCategory.setName(newCategory.getName());
             oldCategory.setGameList(null);
             List<Game> gameList = newCategory.getGameList();
-            if (!gameList.isEmpty()) {
+            if (gameList != null) {
                 oldCategory.getGameList().addAll(gameList);
             }
             categoryService.saveCategory(oldCategory);
