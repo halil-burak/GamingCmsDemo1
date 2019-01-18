@@ -15,12 +15,6 @@ import java.util.List;
 
         @Column(name="URL")
         private String url;
-/*
-        @Column(name="ENVIRONMENT")
-        private String environment;
-
-        @Column(name="TYPE")
-        private String type;*/
 
         @Column(name="LINK")
         private String gameLink;
@@ -36,18 +30,7 @@ import java.util.List;
 
         @Column(name="PUBLISH_IOS")
         private boolean publishIos;
-/*
-        @Column(name="SIZE")
-        private Long size;
 
-        @Column(name="RESIZE")
-        private boolean resize;*/
-
-        /*@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-        @JoinTable(name = "GAME_CATEGORY",
-                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
-        private List<Category> categoryList;*/
         @ManyToMany(cascade = CascadeType.ALL)
         @JoinTable(name = "GAME_CATEGORY",
                 joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
@@ -57,13 +40,6 @@ import java.util.List;
         @OneToMany(mappedBy = "game",
                 fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<GameDescription> descriptions;
-/*
-        @ManyToMany(cascade = {
-                CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-        @JoinTable(name = "GAME_DEVICE",
-                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = @JoinColumn(name = "DEVICE_ID", referencedColumnName = "ID"))
-        private List<Device> deviceList;*/
 
     public Long getId() {
         return id;
@@ -105,30 +81,6 @@ import java.util.List;
         this.descriptions = description;
     }
 
-    /*public List<Device> getDeviceList() {
-        return deviceList;
-    }
-
-    public void setDeviceList(List<Device> deviceList) {
-        this.deviceList = deviceList;
-    }*/
-/*
-    public String getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(String environment) {
-        this.environment = environment;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }*/
-
     public String getGameLink() {
         return gameLink;
     }
@@ -168,20 +120,4 @@ import java.util.List;
     public void setPublishIos(boolean publishIos) {
         this.publishIos = publishIos;
     }
-/*
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    public boolean isResize() {
-        return resize;
-    }
-
-    public void setResize(boolean resize) {
-        this.resize = resize;
-    }*/
 }
