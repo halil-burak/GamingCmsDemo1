@@ -42,7 +42,7 @@ public class CategoryController {
                 json.put("id", category.getId());
                 json.put("name", category.getName());
                 json.put("url", category.getUrl());
-                json.put("gamelist", category.getGameList());
+                json.put("gameList", category.getGameList());
                 jsonObjects.add(json);
             }
         }
@@ -76,7 +76,7 @@ public class CategoryController {
             json.put("id", category.getId());
             json.put("name", category.getName());
             json.put("url", category.getUrl());
-            json.put("gamelist", category.getGameList());
+            json.put("gameList", category.getGameList());
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
@@ -110,7 +110,7 @@ public class CategoryController {
             json.put("id", newCategory.getId());
             json.put("name", newCategory.getName());
             json.put("url", newCategory.getUrl());
-            json.put("gamelist", newCategory.getGameList());
+            json.put("gameList", newCategory.getGameList());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
