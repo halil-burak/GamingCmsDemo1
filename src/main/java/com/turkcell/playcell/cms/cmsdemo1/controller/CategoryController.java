@@ -99,6 +99,8 @@ public class CategoryController {
             Category oldCategory = categoryService.retrieveCategory(id);
             if (newCategory.getName() != null)
                 oldCategory.setName(newCategory.getName());
+            if (newCategory.getUrl() != null)
+                oldCategory.setUrl(newCategory.getUrl());
             oldCategory.setGameList(null);
             List<Game> gameList = newCategory.getGameList();
             if (gameList != null) {

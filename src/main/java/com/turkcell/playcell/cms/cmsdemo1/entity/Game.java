@@ -27,6 +27,15 @@ import java.util.List;
 
         @Column(name="BLOCK_LINK")
         private boolean blockLink;
+
+        @Column(name="PUBLISH_WEB")
+        private boolean publishWeb;
+
+        @Column(name="PUBLISH_ANDROID")
+        private boolean publishAndroid;
+
+        @Column(name="PUBLISH_IOS")
+        private boolean publishIos;
 /*
         @Column(name="SIZE")
         private Long size;
@@ -45,10 +54,16 @@ import java.util.List;
                 inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
         private List<Category> categoryList;
 
-        /*@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-        @JoinColumn(name = "ID")*/
-        @OneToMany(mappedBy = "game")
+        @OneToMany(mappedBy = "game",
+                fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<GameDescription> descriptions;
+/*
+        @ManyToMany(cascade = {
+                CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+        @JoinTable(name = "GAME_DEVICE",
+                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+                inverseJoinColumns = @JoinColumn(name = "DEVICE_ID", referencedColumnName = "ID"))
+        private List<Device> deviceList;*/
 
     public Long getId() {
         return id;
@@ -90,7 +105,14 @@ import java.util.List;
         this.descriptions = description;
     }
 
-    /*
+    /*public List<Device> getDeviceList() {
+        return deviceList;
+    }
+
+    public void setDeviceList(List<Device> deviceList) {
+        this.deviceList = deviceList;
+    }*/
+/*
     public String getEnvironment() {
         return environment;
     }
@@ -123,7 +145,30 @@ import java.util.List;
         this.blockLink = blockLink;
     }
 
-    /*
+    public boolean isPublishWeb() {
+        return publishWeb;
+    }
+
+    public void setPublishWeb(boolean publishWeb) {
+        this.publishWeb = publishWeb;
+    }
+
+    public boolean isPublishAndroid() {
+        return publishAndroid;
+    }
+
+    public void setPublishAndroid(boolean publishAndroid) {
+        this.publishAndroid = publishAndroid;
+    }
+
+    public boolean isPublishIos() {
+        return publishIos;
+    }
+
+    public void setPublishIos(boolean publishIos) {
+        this.publishIos = publishIos;
+    }
+/*
     public Long getSize() {
         return size;
     }

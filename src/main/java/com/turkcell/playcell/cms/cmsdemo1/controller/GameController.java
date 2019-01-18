@@ -40,6 +40,9 @@ public class GameController {
                 JSONObject json = new JSONObject();
                 json.put("id", game.getId());
                 json.put("name", game.getName());
+                json.put("publishWeb", game.isPublishWeb());
+                json.put("publishAndroid", game.isPublishAndroid());
+                json.put("publishIos", game.isPublishIos());
                 //json.put("type", game.getType());
                 json.put("url", game.getUrl());
                 json.put("link", game.getGameLink());
@@ -62,6 +65,9 @@ public class GameController {
             JSONObject json = new JSONObject();
             json.put("id", game.getId());
             json.put("name", game.getName());
+            json.put("publishWeb", game.isPublishWeb());
+            json.put("publishAndroid", game.isPublishAndroid());
+            json.put("publishIos", game.isPublishIos());
             //json.put("type", game.getType());
             json.put("url", game.getUrl());
             json.put("link", game.getGameLink());
@@ -84,6 +90,9 @@ public class GameController {
             JSONObject json = new JSONObject();
             json.put("id", game.getId());
             json.put("name", game.getName());
+            json.put("publishWeb", game.isPublishWeb());
+            json.put("publishAndroid", game.isPublishAndroid());
+            json.put("publishIos", game.isPublishIos());
             //json.put("type", game.getType());
             json.put("url", game.getUrl());
             json.put("gameLink", game.getGameLink());
