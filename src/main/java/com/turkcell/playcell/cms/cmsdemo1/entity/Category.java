@@ -16,19 +16,8 @@ public class Category {
     @Column(name = "URL")
     private String url;
 
-    /*@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PLATFORM_GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = {
-                    @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                    @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
-            })
-    private List<PlatformGameCategory> pgcList;*/
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"))
-    private List<Game> gameList;
+    @OneToMany(mappedBy = "pk.category", cascade = {CascadeType.MERGE})
+    private List<PlatformGameCategory> platformGameCategoryLinks;
 
     public Long getId() {
         return id;
@@ -54,19 +43,11 @@ public class Category {
         this.url = url;
     }
 
-    public List<Game> getGameList() {
-        return gameList;
+    public List<PlatformGameCategory> getPlatformGameCategoryLinks() {
+        return platformGameCategoryLinks;
     }
 
-    public void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
+    public void setPlatformGameCategoryLinks(List<PlatformGameCategory> platformGameCategoryLinks) {
+        this.platformGameCategoryLinks = platformGameCategoryLinks;
     }
-    /*
-    public List<PlatformGameCategory> getPgcList() {
-        return pgcList;
-    }
-
-    public void setPgcList(List<PlatformGameCategory> pgcList) {
-        this.pgcList = pgcList;
-    }*/
 }

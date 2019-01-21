@@ -2,6 +2,7 @@ package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.PlatformGameCategory;
 import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ public class CategoryController {
                 json.put("id", category.getId());
                 json.put("name", category.getName());
                 json.put("url", category.getUrl());
-                json.put("gameList", category.getGameList());
+                json.put("gameList", category.getPlatformGameCategoryLinks());
                 jsonObjects.add(json);
             }
         }
@@ -63,7 +64,7 @@ public class CategoryController {
         json.put("id", category.getId());
         json.put("url", category.getUrl());
         json.put("name", category.getName());
-        json.put("gameList", category.getGameList());
+        json.put("gameList", category.getPlatformGameCategoryLinks());
         return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
     }
 
@@ -76,7 +77,7 @@ public class CategoryController {
             json.put("id", category.getId());
             json.put("name", category.getName());
             json.put("url", category.getUrl());
-            json.put("gameList", category.getGameList());
+            json.put("gameList", category.getPlatformGameCategoryLinks());
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
@@ -101,10 +102,10 @@ public class CategoryController {
                 oldCategory.setName(newCategory.getName());
             if (newCategory.getUrl() != null)
                 oldCategory.setUrl(newCategory.getUrl());
-            oldCategory.setGameList(null);
-            List<Game> gameList = newCategory.getGameList();
+            oldCategory.setPlatformGameCategoryLinks(null);
+            List<PlatformGameCategory> gameList = newCategory.getPlatformGameCategoryLinks();
             if (gameList != null) {
-                oldCategory.getGameList().addAll(gameList);
+                oldCategory.getPlatformGameCategoryLinks().addAll(gameList);
             }
             categoryService.saveCategory(oldCategory);
 
@@ -112,7 +113,7 @@ public class CategoryController {
             json.put("id", newCategory.getId());
             json.put("name", newCategory.getName());
             json.put("url", newCategory.getUrl());
-            json.put("gameList", newCategory.getGameList());
+            json.put("gameList", newCategory.getPlatformGameCategoryLinks());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

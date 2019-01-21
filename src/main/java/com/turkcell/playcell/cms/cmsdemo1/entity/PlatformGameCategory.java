@@ -5,54 +5,32 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PLATFORM_GAME_CATEGORY")
 public class PlatformGameCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private PlatformGameCategoryId pk = new PlatformGameCategoryId();
 
-    @ManyToOne
-    @JoinColumn(name = "PLATFORM_ID")
-    private Platform platform;
+    @Transient
+    public Game getGame() {
+        return getPk().getGame();
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "GAME_ID")
-    private Game game ;
+    @Transient
+    public Category getCategory() {
+        return getPk().getCategory();
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+    @Transient
+    public Platform getPlatform() {
+        return getPk().getPlatform();
+    }
 
     public PlatformGameCategory(){
     }
 
-    public Long getId() {
-        return id;
+    public PlatformGameCategoryId getPk() {
+        return pk;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Platform getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPk(PlatformGameCategoryId pk) {
+        this.pk = pk;
     }
 }

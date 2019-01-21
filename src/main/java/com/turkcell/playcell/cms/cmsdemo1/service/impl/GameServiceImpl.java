@@ -1,6 +1,8 @@
 package com.turkcell.playcell.cms.cmsdemo1.service.impl;
 
+import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.PlatformGameCategory;
 import com.turkcell.playcell.cms.cmsdemo1.repo.GameRepository;
 import com.turkcell.playcell.cms.cmsdemo1.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
