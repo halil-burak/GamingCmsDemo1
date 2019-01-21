@@ -1,6 +1,7 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Category {
                     @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
             })
     private List<PlatformGameCategory> pgcList;*/
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "GAME_CATEGORY",
             joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"))
@@ -60,6 +61,14 @@ public class Category {
 
     public void setGameList(List<Game> gameList) {
         this.gameList = gameList;
+    }
+
+    // convenience method to add a single game to a category
+    public void addGame(Game game) {
+        if (gameList != null) {
+            gameList = new ArrayList<>();
+        }
+        gameList.add(game);
     }
     /*
     public List<PlatformGameCategory> getPgcList() {

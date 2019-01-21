@@ -2,13 +2,9 @@ package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "PLATFORM_GAME_CATEGORY")
+//@Entity
+//@Table(name = "PLATFORM_GAME_CATEGORY")
 public class PlatformGameCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "PLATFORM_ID")
     private Platform platform;
@@ -22,14 +18,6 @@ public class PlatformGameCategory {
     private Category category;
 
     public PlatformGameCategory(){
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Platform getPlatform() {

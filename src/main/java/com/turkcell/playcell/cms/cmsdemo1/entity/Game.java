@@ -1,9 +1,10 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+    @Entity
     @Table(name="GAME")
     public class Game {
         @Id
@@ -31,10 +32,10 @@ import java.util.List;
         @Column(name="PUBLISH_IOS")
         private boolean publishIos;
 
-        @ManyToMany(cascade = CascadeType.ALL)
+        @ManyToMany(cascade = {CascadeType.MERGE})
         @JoinTable(name = "GAME_CATEGORY",
-                joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
+            joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
         private List<Category> categoryList;
 
         @OneToMany(mappedBy = "game",
@@ -71,6 +72,14 @@ import java.util.List;
 
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    // convenience method to add a single category to a game
+    public void addCategory(Category category) {
+        if (categoryList == null) {
+            categoryList = new ArrayList<>();
+        }
+        categoryList.add(category);
     }
 
     public List<GameDescription> getDescriptions() {

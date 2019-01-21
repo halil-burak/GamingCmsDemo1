@@ -2,6 +2,7 @@ package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Language;
 import com.turkcell.playcell.cms.cmsdemo1.service.LanguageService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,19 +33,15 @@ public class LanguageController {
     @GetMapping("")
     public ResponseEntity<?> getLanguages() {
         logger.info("Retrieving languages.");
-        List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
+        JSONArray jsonArray = new JSONArray();
         if (!languageService.retrieveLanguages().isEmpty()) {
             List<Language> languageList = languageService.retrieveLanguages();
             for (Language language : languageList) {
-                JSONObject json = new JSONObject();
-                json.put("id", language.getId());
-                json.put("name", language.getName());
-                json.put("shortName", language.getShortName());
-                jsonObjects.add(json);
+                jsonArray.put(feedJson(language));
             }
             logger.info("Languages listed");
         }
-        return new ResponseEntity<Object>(jsonObjects.toString(), HttpStatus.OK);
+        return new ResponseEntity<Object>(jsonArray.toString(), HttpStatus.OK);
     }
 
     @PostMapping("")
@@ -53,11 +49,7 @@ public class LanguageController {
         logger.info("Adding a language.");
         try {
             languageService.saveLanguage(language);
-            JSONObject json = new JSONObject();
-            json.put("id", language.getId());
-            json.put("name", language.getName());
-            json.put("shortName", language.getShortName());
-            return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
+            return new ResponseEntity<Object>(feedJson(language).toMap(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -100,5 +92,13 @@ public class LanguageController {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    public JSONObject feedJson(Language language) {
+        JSONObject json = new JSONObject();
+        json.put("id", language.getId());
+        json.put("name", language.getName());
+        json.put("shortName", language.getShortName());
+        return json;
     }
 }
