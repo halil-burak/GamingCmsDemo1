@@ -2,6 +2,7 @@ package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Platform;
 import com.turkcell.playcell.cms.cmsdemo1.entity.PlatformGameCategory;
 import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import org.json.JSONObject;
@@ -12,8 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/categories")
@@ -43,7 +43,7 @@ public class CategoryController {
                 json.put("id", category.getId());
                 json.put("name", category.getName());
                 json.put("url", category.getUrl());
-                json.put("gameList", category.getPlatformGameCategoryLinks());
+                json.put("gameList", category.getPlatformsByGame().keySet());
                 jsonObjects.add(json);
             }
         }
@@ -64,7 +64,7 @@ public class CategoryController {
         json.put("id", category.getId());
         json.put("url", category.getUrl());
         json.put("name", category.getName());
-        json.put("gameList", category.getPlatformGameCategoryLinks());
+        //json.put("gameList", category.getPlatformsByGame().keySet());
         return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
     }
 
@@ -77,7 +77,7 @@ public class CategoryController {
             json.put("id", category.getId());
             json.put("name", category.getName());
             json.put("url", category.getUrl());
-            json.put("gameList", category.getPlatformGameCategoryLinks());
+            json.put("gameList", category.getPlatformsByGame().keySet());
 
             return new ResponseEntity<Object>(json.toMap(), HttpStatus.OK);
         }
@@ -102,10 +102,11 @@ public class CategoryController {
                 oldCategory.setName(newCategory.getName());
             if (newCategory.getUrl() != null)
                 oldCategory.setUrl(newCategory.getUrl());
-            oldCategory.setPlatformGameCategoryLinks(null);
-            List<PlatformGameCategory> gameList = newCategory.getPlatformGameCategoryLinks();
+            oldCategory.setPlatformsByGame(null);
+            Set<Game> gameList = newCategory.getPlatformsByGame().keySet();
+            Map<Game, Platform> platformsByGame = newCategory.getPlatformsByGame();
             if (gameList != null) {
-                oldCategory.getPlatformGameCategoryLinks().addAll(gameList);
+                oldCategory.setPlatformsByGame(platformsByGame);
             }
             categoryService.saveCategory(oldCategory);
 
@@ -113,7 +114,7 @@ public class CategoryController {
             json.put("id", newCategory.getId());
             json.put("name", newCategory.getName());
             json.put("url", newCategory.getUrl());
-            json.put("gameList", newCategory.getPlatformGameCategoryLinks());
+            json.put("gameList", newCategory.getPlatformsByGame().keySet());
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

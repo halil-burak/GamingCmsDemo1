@@ -90,7 +90,7 @@ public class GameController {
         });
         categoriesArray.put(categoriesJson);
         json.put("categories", categoriesArray);*/
-        json.put("platforms", game.getPlatformGameCategoryLinks());
+        json.put("platforms", game.getCategoriesByPlatform().keySet());
         json.put("descriptions", game.getDescriptions());
 
         return json;
@@ -111,7 +111,7 @@ public class GameController {
             if (newGame.getGameLink() != null) {
                 game.setGameLink(newGame.getGameLink());
             }
-            game.setPlatformGameCategoryLinks(newGame.getPlatformGameCategoryLinks());
+            game.setCategoriesByPlatform(newGame.getCategoriesByPlatform());
             game.setBlockLink(newGame.isBlockLink());
 
             gameService.saveGame(game);
