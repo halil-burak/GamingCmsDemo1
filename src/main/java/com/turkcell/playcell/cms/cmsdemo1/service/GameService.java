@@ -18,4 +18,10 @@ public interface GameService {
     public boolean existsById(Long gameId);
 
     public List<Category> retrieveCategoriesOfTheGame(Game game);
+
+    public List<Game> getAllGames();
+
+    public Game findByName(String name);
+
+    public List<Game> getGamesOfCategory(Long categoryId);
 }

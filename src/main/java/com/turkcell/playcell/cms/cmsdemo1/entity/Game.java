@@ -1,5 +1,7 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +34,11 @@ import java.util.List;
         @Column(name="PUBLISH_IOS")
         private boolean publishIos;
 
-        @ManyToMany(cascade = {CascadeType.MERGE})
+        @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
         @JoinTable(name = "GAME_CATEGORY",
             joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
+        @JsonIgnoreProperties("gameList")
         private List<Category> categoryList;
 
         @OneToMany(mappedBy = "game",

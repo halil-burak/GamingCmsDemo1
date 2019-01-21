@@ -75,4 +75,21 @@ public class GameServiceImpl implements GameService {
         }
         return categories;
     }
+
+    @Override
+    public List<Game> getAllGames() {
+        return gameRepository.findAllActiveGames();
+    }
+
+    @Override
+    public Game findByName(String name) {
+        return gameRepository.findByName(name);
+    }
+
+    @Override
+    public List<Game> getGamesOfCategory(Long categoryId) {
+        return gameRepository.getGamesOfCategory(categoryId);
+    }
+
+
 }
