@@ -2,6 +2,7 @@ package com.turkcell.playcell.cms.cmsdemo1.controller;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.GamePlatformCategory;
 import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/categories")
@@ -86,10 +88,10 @@ public class CategoryController {
                 oldCategory.setName(newCategory.getName());
             if (newCategory.getUrl() != null)
                 oldCategory.setUrl(newCategory.getUrl());
-            oldCategory.setGameList(null);
-            List<Game> gameList = newCategory.getGameList();
-            if (gameList != null) {
-                oldCategory.getGameList().addAll(gameList);
+            oldCategory.setPgcLinks(null);
+            Set<GamePlatformCategory> linkList = newCategory.getPgcLinks();
+            if (linkList != null) {
+                oldCategory.getPgcLinks().addAll(linkList);
             }
             categoryService.saveCategory(oldCategory);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -102,7 +104,7 @@ public class CategoryController {
         json.put("id", category.getId());
         json.put("name", category.getName());
         json.put("url", category.getUrl());
-        json.put("gameList", category.getGameList());
+        json.put("gameList", category.getPgcLinks());
         return json;
     }
 }

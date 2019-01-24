@@ -1,5 +1,7 @@
 package com.turkcell.playcell.cms.cmsdemo1.controller;
 
+import com.turkcell.playcell.cms.cmsdemo1.entity.GamePlatformCategory;
+import com.turkcell.playcell.cms.cmsdemo1.service.CategoryService;
 import com.turkcell.playcell.cms.cmsdemo1.service.GameService;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
 import org.json.JSONArray;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/games")
@@ -23,12 +26,23 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     public GameService getGameService() {
         return gameService;
     }
 
     public void setGameService(GameService gameService) {
         this.gameService = gameService;
+    }
+
+    public CategoryService getCategoryService() {
+        return categoryService;
+    }
+
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping("")
@@ -71,12 +85,8 @@ public class GameController {
         json.put("publishWeb", game.isPublishWeb());
         json.put("publishAndroid", game.isPublishAndroid());
         json.put("publishIos", game.isPublishIos());
-        //json.put("type", game.getType());
         json.put("url", game.getUrl());
         json.put("gameLink", game.getGameLink());
-        //json.put("size", game.getSize());
-        //json.put("resize", game.isResize());
-        //json.put("environment", game.getEnvironment());
         json.put("isBlockLink", game.isBlockLink());
 
         /*List<Category> gameCategories = gameService.retrieveCategoriesOfTheGame(game);
@@ -94,7 +104,7 @@ public class GameController {
         });
         categoriesArray.put(categoriesJson);
         json.put("categories", categoriesArray);*/
-        json.put("categories", game.getCategoryList());
+        json.put("categories", game.getPgcLinks());
         json.put("descriptions", game.getDescriptions());
 
         return json;
@@ -115,7 +125,7 @@ public class GameController {
             if (newGame.getGameLink() != null) {
                 game.setGameLink(newGame.getGameLink());
             }
-            game.setCategoryList(newGame.getCategoryList());
+            game.setPgcLinks(newGame.getPgcLinks());
             game.setBlockLink(newGame.isBlockLink());
 
             gameService.saveGame(game);

@@ -1,49 +1,44 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-    @Entity
-    @Table(name="GAME")
-    public class Game {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+@Entity
+@Table(name = "GAME")
+public class Game {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column(name="NAME")
-        private String name;
+    @Column(name = "NAME")
+    private String name;
 
-        @Column(name="URL")
-        private String url;
+    @Column(name = "URL")
+    private String url;
 
-        @Column(name="LINK")
-        private String gameLink;
+    @Column(name = "LINK")
+    private String gameLink;
 
-        @Column(name="BLOCK_LINK")
-        private boolean blockLink;
+    @Column(name = "BLOCK_LINK")
+    private boolean blockLink;
 
-        @Column(name="PUBLISH_WEB")
-        private boolean publishWeb;
+    @Column(name = "PUBLISH_WEB")
+    private boolean publishWeb;
 
-        @Column(name="PUBLISH_ANDROID")
-        private boolean publishAndroid;
+    @Column(name = "PUBLISH_ANDROID")
+    private boolean publishAndroid;
 
-        @Column(name="PUBLISH_IOS")
-        private boolean publishIos;
+    @Column(name = "PUBLISH_IOS")
+    private boolean publishIos;
 
-        @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-        @JoinTable(name = "GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
-        @JsonIgnoreProperties("gameList")
-        private List<Category> categoryList;
+    // GAME-PLATFORM-CATEGORY MAPPING
+    @OneToMany(mappedBy = "linkPk.game", cascade = CascadeType.MERGE)
+    private Set<GamePlatformCategory> pgcLinks;
 
-        @OneToMany(mappedBy = "game",
-                fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-        private List<GameDescription> descriptions;
+    @OneToMany(mappedBy = "game",
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<GameDescription> descriptions;
 
     public Long getId() {
         return id;
@@ -67,22 +62,6 @@ import java.util.List;
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
-    }
-
-    // convenience method to add a single category to a game
-    public void addCategory(Category category) {
-        if (categoryList == null) {
-            categoryList = new ArrayList<>();
-        }
-        categoryList.add(category);
     }
 
     public List<GameDescription> getDescriptions() {
@@ -131,5 +110,13 @@ import java.util.List;
 
     public void setPublishIos(boolean publishIos) {
         this.publishIos = publishIos;
+    }
+
+    public Set<GamePlatformCategory> getPgcLinks() {
+        return pgcLinks;
+    }
+
+    public void setPgcLinks(Set<GamePlatformCategory> pgcLinks) {
+        this.pgcLinks = pgcLinks;
     }
 }

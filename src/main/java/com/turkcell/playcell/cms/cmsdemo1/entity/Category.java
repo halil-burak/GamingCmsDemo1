@@ -1,10 +1,8 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -19,20 +17,9 @@ public class Category {
     @Column(name = "URL")
     private String url;
 
-    /*@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PLATFORM_GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = {
-                    @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"),
-                    @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID")
-            })
-    private List<PlatformGameCategory> pgcList;*/
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinTable(name = "GAME_CATEGORY",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "ID"))
-    @JsonIgnoreProperties("categoryList")
-    private List<Game> gameList;
+    // GAME-PLATFORM-CATEGORY MAPPING
+    @OneToMany(mappedBy = "linkPk.category", cascade = CascadeType.MERGE)
+    private Set<GamePlatformCategory> pgcLinks;
 
     public Long getId() {
         return id;
@@ -58,27 +45,11 @@ public class Category {
         this.url = url;
     }
 
-    public List<Game> getGameList() {
-        return gameList;
+    public Set<GamePlatformCategory> getPgcLinks() {
+        return pgcLinks;
     }
 
-    public void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
+    public void setPgcLinks(Set<GamePlatformCategory> pgcLinks) {
+        this.pgcLinks = pgcLinks;
     }
-
-    // convenience method to add a single game to a category
-    public void addGame(Game game) {
-        if (gameList != null) {
-            gameList = new ArrayList<>();
-        }
-        gameList.add(game);
-    }
-    /*
-    public List<PlatformGameCategory> getPgcList() {
-        return pgcList;
-    }
-
-    public void setPgcList(List<PlatformGameCategory> pgcList) {
-        this.pgcList = pgcList;
-    }*/
 }

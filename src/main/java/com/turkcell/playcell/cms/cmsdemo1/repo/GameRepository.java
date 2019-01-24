@@ -4,6 +4,7 @@ import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
      * @return
      */
 
+    /*
     @Query("SELECT g FROM Game g JOIN g.categoryList c WHERE c.id = ?1")
-    List<Game> getGamesOfCategory(Long categoryId);
+    List<Game> getGamesOfCategory(Long categoryId);*/
+
+    /*
+    @Query("SELECT g FROM Game g JOIN GamePlatformCategory gpc WHERE gpc.category = :cId")
+    List<Game> findGamesByCategoryId(@Param("cId") Long categoryId);*/
 }

@@ -1,24 +1,24 @@
 package com.turkcell.playcell.cms.cmsdemo1.entity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-//@Entity
-//@Table(name = "PLATFORM_GAME_CATEGORY")
-public class PlatformGameCategory {
-    @ManyToOne
+@Embeddable
+public class GamePlatformCategoryId implements java.io.Serializable {
+
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "PLATFORM_ID")
     private Platform platform;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "GAME_ID")
     private Game game ;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-
-    public PlatformGameCategory(){
-    }
 
     public Platform getPlatform() {
         return platform;

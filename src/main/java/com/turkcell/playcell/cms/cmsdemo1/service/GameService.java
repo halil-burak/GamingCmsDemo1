@@ -23,5 +23,7 @@ public interface GameService {
 
     public Game findByName(String name);
 
-    public List<Game> getGamesOfCategory(Long categoryId);
+    //public List<Game> getGamesOfCategory(Long categoryId);
+
+    public List<Game> findGamesByCategoryId(Long categoryId);
 }

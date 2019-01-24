@@ -1,6 +1,7 @@
 package com.turkcell.playcell.cms.cmsdemo1.service;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
+import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
 
 import java.util.List;
 

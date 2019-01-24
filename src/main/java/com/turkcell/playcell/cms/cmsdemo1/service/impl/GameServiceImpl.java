@@ -2,6 +2,7 @@ package com.turkcell.playcell.cms.cmsdemo1.service.impl;
 
 import com.turkcell.playcell.cms.cmsdemo1.entity.Category;
 import com.turkcell.playcell.cms.cmsdemo1.entity.Game;
+import com.turkcell.playcell.cms.cmsdemo1.entity.GamePlatformCategory;
 import com.turkcell.playcell.cms.cmsdemo1.repo.CategoryRepository;
 import com.turkcell.playcell.cms.cmsdemo1.repo.GameRepository;
 import com.turkcell.playcell.cms.cmsdemo1.service.GameService;
@@ -65,15 +66,17 @@ public class GameServiceImpl implements GameService {
         return gameRepository.existsById(gameId);
     }
 
+
     @Override
     public List<Category> retrieveCategoriesOfTheGame(Game game) {
-        List<Category> categories = new ArrayList<>();
-        if (!game.getCategoryList().isEmpty()) {
-            for (Category c : game.getCategoryList()) {
+        /*List<Category> categories = new ArrayList<>();
+        if (!game.getCategories().isEmpty()) {
+            for (Category c : game.getCategories()) {
                 categories.add(c);
             }
         }
-        return categories;
+        return categories;*/
+        return null;
     }
 
     @Override
@@ -87,9 +90,15 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<Game> findGamesByCategoryId(Long categoryId) {
+        //return gameRepository.findGamesByCategoryId(categoryId);
+        return null;
+    }
+
+    /*@Override
     public List<Game> getGamesOfCategory(Long categoryId) {
         return gameRepository.getGamesOfCategory(categoryId);
-    }
+    }*/
 
 
 }
